@@ -1,0 +1,20 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: "resnet50v2tf"
+  annotations:
+    autoscaling.knative.dev/target: "1"
+spec:
+  predictor:
+    serviceAccountName: sa
+    containerConcurrency: 5
+    scaleMetric: concurrency
+    minReplicas: 1
+    timeout: 60
+    batcher:
+      maxBatchSize: 32
+      maxLatency: 500
+    model:
+      modelFormat:
+        name: tensorflow
+      storageUri: "s3://zzt-models/tf/resnet50v2"
