@@ -12,18 +12,9 @@ def map_fn(y):
 
 
 def mod_model(model_url: str, output_dir: str):
-    model = tf.keras.Sequential()
-    model.add(tf.keras.layers.Input(name='image_bytes', shape=[],
-                                    dtype=tf.string))
-    b64_to_numpy = tf.keras.layers.Lambda(map_fn)
-    model.add(b64_to_numpy)
-
-    # model_url = 'https://tfhub.dev/google/imagenet/resnet_v2_50/classification/5'
     net = hub.KerasLayer(model_url, name='feature_vector')
-    model.add(net)
-
     # save the model
-    model.save(output_dir)
+    net.save(output_dir)
 
 
 def main():
