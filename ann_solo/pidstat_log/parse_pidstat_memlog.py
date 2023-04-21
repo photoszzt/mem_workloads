@@ -26,14 +26,17 @@ def main():
     # data is collected per second
     rss_t = [i for i in range(len(rss_arr))]
     vsz_t = [i for i in range(len(vsz_arr))]
-    plt.figure()
+    plt.figure(figsize=(9, 6))
     plt.plot(rss_t, rss_arr, label="RSS(MB)")
     plt.plot(vsz_t, vsz_arr, label="VSZ(MB)")
-    plt.xlabel('time(s)')
-    plt.ylabel('memory(MB)')
-    plt.legend()
+    plt.xticks(fontsize=18)
+    plt.yticks(fontsize=18)
+    plt.xlabel('time(s)', fontsize=18)
+    plt.ylabel('memory(MB)', fontsize=18)
+    plt.legend(fontsize=18)
     # plt.show()
     plt.savefig(f'./{stem}_mem.pdf', bbox_inches='tight')
+    plt.savefig(f'./{stem}_mem.jpg', bbox_inches='tight', dpi=300)
 
 
 if __name__ == '__main__':
